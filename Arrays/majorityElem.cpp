@@ -5,7 +5,18 @@
 
 using namespace  std;
 
-int majorityElem(vector<int> nums){
+/*
+? this works but this is a bad approch ---
+? sorting is expensive ---  TC :- O(n log n), SC :- O(1)
+
+int majorityElem(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        return nums[nums.size()/2];
+    }
+*/
+
+
+int majorityElem(vector<int>& nums){
     unordered_map<int, int> m;
     int n = nums.size();
     for (int i = 0; i < n; i++){
