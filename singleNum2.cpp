@@ -21,22 +21,43 @@ int singleNum(vector<int>& nums){
     }
     return -1;
 }
+
+! 2.
+? TC :- O(n), SC :- O(1)
+int singleNum(vector<int>& nums){
+    int result = 0;
+    for (int i = 0; i < 32; i++){
+        int bitSum = 0;
+        for(int num : nums){
+            bitSum += (num >> i) & 1;
+        };
+
+        if(bitSum % 3){
+            result |= (1 << i);
+        }
+    }
+    return result;
+}
+
 */
 
 int singleNum(vector<int>& nums){
-    int ans = 0;
-    for(int num : nums){
-        ans ^= num;
-        cout << "loop : " << ans << endl;
+    int result = 0;
+    for (int i = 0; i < 32; i++){
+        int bitSum = 0;
+        for(int num : nums){
+            bitSum += (num >> i) & 1;
+        };
+
+        if(bitSum % 3){
+            result |= (1 << i);
+        }
     }
-    cout << "ans : " << ans << endl;
-    return ans;
+    return result;
 }
 
-
-
 int main () {
-    vector<int> nums = {0, 1, 0, 1, 0, 1, 99};
+    vector<int> nums = {30000,500,100,30000,100,30000,100};
     cout << singleNum(nums) << endl;
     return 0;
 }
