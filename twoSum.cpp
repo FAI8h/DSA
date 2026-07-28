@@ -23,7 +23,29 @@ vector<int> twoSum(vector<int>& nums, int target){
     return ans;
 }
 
-
+! 2.
+? TC :- O(n log n), SC :- O(n)
+vector<int> twoSum(vector<int>& nums, int tar){
+    vector<int> ans;
+    int n = nums.size();
+    sort(nums.begin(), nums.end());
+    int st = 0, end = n - 1;
+    for (int i = 0; i < n; i++)
+    {
+        int currSum = nums[st] + nums[end];
+        if(currSum == tar){
+            ans.push_back(st);
+            ans.push_back(end);
+            break;
+        }
+        if(currSum > tar){
+            end--;
+        }else{
+            st++;
+        }
+    };
+    return ans;
+}
 
 */
 
