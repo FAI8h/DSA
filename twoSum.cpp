@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <unordered_map>
 
 using namespace  std;
 
@@ -47,27 +48,44 @@ vector<int> twoSum(vector<int>& nums, int tar){
     return ans;
 }
 
+! 3.
+? TC :- O(n), SC :- O(n)
+vector<int> twoSum(vector<int>& nums, int tar){
+    vector<int> ans;
+    int n = nums.size();
+    unordered_map<int, int> m;
+
+    for (int i = 0; i < n; i++){
+        int x = nums[i];
+        int y = tar - x;
+
+        if(m.find(y) != m.end()){
+            ans.push_back(m[y]);
+            ans.push_back(i);
+            break;
+        }
+        m[x] = i;
+    }
+    return ans;
+}
 */
 
 vector<int> twoSum(vector<int>& nums, int tar){
     vector<int> ans;
     int n = nums.size();
-    sort(nums.begin(), nums.end());
-    int st = 0, end = n - 1;
-    for (int i = 0; i < n; i++)
-    {
-        int currSum = nums[st] + nums[end];
-        if(currSum == tar){
-            ans.push_back(st);
-            ans.push_back(end);
+    unordered_map<int, int> m;
+
+    for (int i = 0; i < n; i++){
+        int x = nums[i];
+        int y = tar - x;
+
+        if(m.find(y) != m.end()){
+            ans.push_back(m[y]);
+            ans.push_back(i);
             break;
         }
-        if(currSum > tar){
-            end--;
-        }else{
-            st++;
-        }
-    };
+        m[x] = i;
+    }
     return ans;
 }
 
