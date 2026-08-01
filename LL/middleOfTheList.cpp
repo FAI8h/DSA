@@ -58,6 +58,20 @@ class List{
             cout << slow->data << endl;
         }
 
+        void reverseLL(){
+            Node *curr = head;
+            Node *prev = NULL;
+            Node *currNext = NULL;
+
+            while(curr != NULL){
+                currNext = curr->next;
+                curr->next = prev;
+                prev = curr;
+                curr = currNext;
+            }
+            head = prev;
+        }
+
         void printll(){
             Node *temp = head;
 
@@ -71,14 +85,14 @@ class List{
 
 int main() {
     List l;
-    l.push_back(0);
     l.push_back(1);
     l.push_back(2);
     l.push_back(3);
+    l.push_back(4);
     l.push_back(5);
-
     l.printll();
-    l.middleOfLL();
+    l.reverseLL();
+    l.printll();
 
     return 0;
 };
