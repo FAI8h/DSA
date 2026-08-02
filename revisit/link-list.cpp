@@ -85,6 +85,18 @@ class List{
             head = prev;
         }
 
+        void middleofLL(){
+
+            Node *slow = head;
+            Node *fast = head;
+
+            while(fast != NULL && fast->next != NULL){
+                slow = slow->next;
+                fast = fast->next->next;
+            };
+            cout << slow->data << endl;
+        }
+
         void printll(){
             Node *curr = head;
 
@@ -109,5 +121,7 @@ int main () {
     
     l.reversell();
     l.printll();
+
+    l.middleofLL();
     return 0;
 }
