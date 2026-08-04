@@ -46,29 +46,38 @@ class List{
         };
 
         void pop_front(){
-            if(head == NULL){
-                return;
-            }
+            if(head == NULL)return;
 
             Node *temp = head;
             head = head->next;
             temp->next = NULL;
-            
+
             delete temp;
-        };
-        void pop_back(){
+
             if(head == NULL){
+                tail = NULL;
+            }
+        }
+        void pop_back(){
+            if(head == NULL) return;
+
+            if(head == tail){
+                delete head;
+                head = NULL;
+                tail = NULL;
                 return;
             }
 
             Node *temp = head;
-            while(temp->next != tail || temp->next->next != NULL){
+            while(temp->next != tail){
                 temp = temp->next;
             };
+
             temp->next = NULL;
             delete tail;
+
             tail = temp;
-        };
+        }
 
         void reversell(){
             Node *curr = head;
