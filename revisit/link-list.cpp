@@ -97,6 +97,20 @@ class List{
             cout << slow->data << endl;
         }
 
+        bool detectCycle(){
+            Node *slow = head;
+            Node *fast = head;
+
+            while(fast != NULL && fast->next != NULL){
+                slow = slow->next;
+                fast = fast->next->next;
+
+                if(slow == fast) return true;
+            }
+
+            return false;
+        }
+
         void printll(){
             Node *curr = head;
 
@@ -115,13 +129,11 @@ int main () {
     l.push_back(2);
     l.push_back(3);
     l.push_back(4);
-    l.push_front(5);
+    l.push_back(5);
     
-    l.printll();
-    
-    l.reversell();
     l.printll();
 
-    l.middleofLL();
+    cout << l.detectCycle() << endl;
+
     return 0;
 }
