@@ -22,6 +22,8 @@ bool validPrentheses(string b){
                 s.pop();
             }else if(c == ')' && s.top() == '('){
                 s.pop();
+            }else{//? if opeartion is in this block and none of the above condition matches means its not valid 
+                return false;
             }
         }
     }
