@@ -7,8 +7,7 @@
 using namespace  std;
 
 vector<int> dailyTemp(vector<int> &temps){
-    vector<int> ans(temps.size(),-1);
-    unordered_map<int, int> m;
+    vector<int> ans(temps.size(),0);
     stack<int> s;
 
     for (int i = 0; i < temps.size(); i++){
