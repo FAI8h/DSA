@@ -10,7 +10,7 @@ using namespace  std;
 bool validPallindrome(string s){
     int left = 0, right = s.length() - 1;
 
-    while(left <= right){
+    while(left < right){
 
         if(!isalnum(s[left])){
             left++;
@@ -38,14 +38,12 @@ bool validPallindrome(string s){
 
     while(left <= right){
 
-        if(!isalnum(s[left])){
+        while(left < right && !isalnum(s[left])){
             left++;
-            continue;
         }
 
-        if(!isalnum(s[right])){
+        while(left < right && !isalnum(s[right])){
             right--;
-            continue;
         }
 
         if(tolower(s[left]) != tolower(s[right])){
