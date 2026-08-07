@@ -6,6 +6,7 @@
 
 using namespace  std;
 
+/*
 bool validAnagram(string s, string t){
     unordered_map<char, int> m;
 
@@ -25,10 +26,30 @@ bool validAnagram(string s, string t){
 
     return m.size() == 0;
 }
+*/
+
+bool validAnagram(string s, string t){
+    if(s.size() != t.size()) return false;
+
+    int count[26] = {0};
+
+    for (int i = 0; i < s.size(); i++){
+        count[s[i] - 'a']++;
+        count[t[i] - 'a']--;
+    }
+
+    for (int i = 0; i < 26; i++){
+        if(count[i] != 0){
+            return false;
+        }
+    }
+
+    return true;
+}
 
 int main () {
     string s = "anagram";
-    string t = "nagara";
+    string t = "nagaram";
 
     cout << validAnagram(s, t) <<endl;
     return 0;
