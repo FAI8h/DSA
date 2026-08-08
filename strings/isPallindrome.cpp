@@ -46,6 +46,9 @@ bool validPallindrome(string s){
             right--;
         }
 
+        if(left >= right)
+            return true;
+
         if(tolower(s[left]) != tolower(s[right])){
             return false;
         }
