@@ -46,7 +46,8 @@ int replaceChar(string s, int k){
             m[s[right] - 'A'] = 1;
         }
         maxFrq = max(maxFrq, m[s[right] - 'A']);
-        
+        //? this if cond is the key part , maxFreq tracks the max freq of a char, and we subtract that with the current window and compare it with the number of operations allowed 
+        //? think of it this way if the window keeps growing and we want is maximimum number of repeating char so the max freq should be the freq of repeating char , and when that becomes false it means we are looking in a invalid window / too much operation needed to make it valid so we slide by 1 index
         if((right - left + 1) - maxFrq > k){
             m[s[left] - 'A']--;
             left++;
