@@ -66,47 +66,37 @@ void printLL(Node *head){
 
 Node* reverseInRange(Node *head, int left, int right){
     if(left == right) return head;
-    if(head->next == NULL) return head;
-    Node *curr = head;
-    Node *beforeLeft = NULL;
-    Node *afterRight = NULL;
-    Node *leftNode = NULL;
-    Node *rightNode = NULL;
 
-    for (Node *i = head; i != NULL; i = i->next){
-        
+    Node *dummy = new Node(-1);
+    Node *curr = NULL;// points at the left / starting point of the sublist & this will be sublist new Tail
+    Node *prev = NULL;// points at the left - 1 / before starting of the sublist
+
+    dummy->next = head;
+    prev = dummy;
+    for (int i = 0; i < left - 1; i++){
+        prev = prev->next;
     }
 
-        while (curr != NULL)
-        {
-            if (curr->next != NULL && curr->next->val == left)
-                beforeLeft = curr;
-            if (curr->val == left)
-                leftNode = curr;
-            if (curr->val == right)
-                rightNode = curr;
-            if (rightNode != NULL)
-                afterRight = rightNode->next;
-            curr = curr->next;
-        }
+    curr = prev->next; // setting the curr pointer to the start of the sublist
 
-    // * reverse
-    Node *curr1 = leftNode;// starting of the range //* head
-    Node *prev = NULL;
-    Node *next = NULL;
+    //* reverse the node
+    Node *temp = curr;// pointing to head
+    Node *tempNext = NULL;
+    Node *tempPrev = NULL; // this will become new sublist head
 
-    while(curr1 != afterRight){
-        next = curr1->next;
-        curr1->next = prev;
+    for (int i = 0; i <= right - left; i++){
+        tempNext = temp->next;
+        temp->next = tempPrev;
 
-        prev = curr1;
-        curr1 = next;
+        tempPrev = temp;
+        temp = tempNext;
     }
 
-    beforeLeft->next = rightNode;
-    leftNode->next = afterRight;
+    prev->next = tempPrev;
+    curr->next = temp;
 
-    return head;
+    //* this is so important if the sublist starts at very head then after reverse will change the given head so do not return head; instead return dummy->next;
+    return dummy->next;
 }
 
 int main () {
@@ -119,7 +109,7 @@ int main () {
     l1.push_back(5);
     printLL(l1.head);
     
-    reverseInRange(l1.head, 2, 5);
+    reverseInRange(l1.head, 2, 4);
     printLL(l1.head);
 
     return 0;
