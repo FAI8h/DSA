@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <string>
 #include <climits>
+#include <unordered_map>
 
 using namespace  std;
 
@@ -77,10 +78,32 @@ void printLLRandom(Node *head){
     Node *curr = head;
 
     while(curr != NULL){
-        cout << curr->val << " -> " << curr->random->val << " -> ";
+        cout << "( " << curr->val << " -> " << curr->random->val << " ) -> ";
         curr = curr->next;
     }
     cout << "NULL" << endl;
+}
+
+Node *copyWithRandom(Node *head){
+    unordered_map<Node *, Node*> m;
+    Node *curr = head;
+
+    while(curr != NULL){
+        Node *newNode = new Node(curr->val);
+
+        m[curr] = newNode;
+        curr = curr->next;
+    }
+    
+    curr = head;
+
+    while(curr != NULL){
+        m[curr]->next = m[curr->next];
+        m[curr]->random = m[curr->random];
+        curr = curr->next;
+    }
+
+    return m[head];
 }
 
 int main(){
@@ -101,7 +124,10 @@ int main(){
 
 
     printLL(l.head);
-    printLLRandom(l.head);
+
+    Node *newHead = copyWithRandom(l.head);
+
+    printLL(newHead);
 
     return 0;
 }
