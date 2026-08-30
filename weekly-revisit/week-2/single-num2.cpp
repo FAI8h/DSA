@@ -7,9 +7,8 @@
 using namespace  std;
 
 int singleNum2(vector<int> &nums){
-    int n = nums.size();
     int ans = 0;
-    for(int i = 0; i < n; i++){
+    for(int i = 0; i < 32; i++){
         int bitSum{0};
 
         for(int num : nums){
