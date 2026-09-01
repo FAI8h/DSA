@@ -68,33 +68,19 @@ Node *addTwoList(Node *l1, Node *l2){
         d2 = d2->next;
     }
 
-    if(!d1){
-        while(d2 != NULL){
-            currSum = d2->val + carry;
-            Node *newNode = new Node(currSum % 10);
-            dummy->next = newNode;
-            dummy = dummy->next;
+    while(d1 || d2 || carry){
+        int val1 = d1 ? d1->val : 0;
+        int val2 = d2 ? d2->val : 0;
+        currSum = val1 + val2 + carry;
 
-            carry = currSum / 10;
-
-            d2 = d2->next;
-        }
-    }else{
-        while(d1 != NULL){
-            currSum = d1->val + carry;
-            Node *newNode = new Node(currSum % 10);
-            dummy->next = newNode;
-            dummy = dummy->next;
-
-            carry = currSum / 10;
-
-            d1 = d1->next;
-        }
-    }
-
-    if(carry > 0){
-        Node *newNode = new Node(carry);
+        Node *newNode = new Node(currSum % 10);
         dummy->next = newNode;
+        dummy = dummy->next;
+
+        carry = currSum / 10;
+
+        if(d1) d1 = d1->next;
+        if(d2) d2 = d2->next;
     }
 
     return newList.next;
@@ -102,14 +88,19 @@ Node *addTwoList(Node *l1, Node *l2){
 
 int main(){
     List l1;
-    l1.push_back(2);
-    l1.push_back(4);
-    l1.push_back(3);
+    l1.push_back(9);
+    l1.push_back(9);
+    l1.push_back(9);
+    l1.push_back(9);
+    l1.push_back(9);
+    l1.push_back(9);
+    l1.push_back(9);
 
     List l2;
-    l2.push_back(5);
-    l2.push_back(6);
-    l2.push_back(4);
+    l2.push_back(9);
+    l2.push_back(9);
+    l2.push_back(9);
+    l2.push_back(9);
 
     printLL(l1.head);
     printLL(l2.head);
