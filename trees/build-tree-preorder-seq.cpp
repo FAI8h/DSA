@@ -1,8 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <climits>
 
 using namespace  std;
 
@@ -20,11 +17,10 @@ public:
 };
 
 static int idx = -1;
-Node *buildTree(vector<int> &seq){
+
+Node* buildTree(vector<int>& seq){
     idx++;
-
     if(seq[idx] == -1) return NULL;
-
     Node *currNode = new Node(seq[idx]);
 
     currNode->left = buildTree(seq);
@@ -35,9 +31,10 @@ Node *buildTree(vector<int> &seq){
 
 void preOrder(Node *root){
     if(root == NULL){
-        cout << "-1" << " ";
+        cout << " -1 ";
         return;
     }
+
     cout << root->val << " ";
     preOrder(root->left);
     preOrder(root->right);
@@ -45,9 +42,8 @@ void preOrder(Node *root){
 
 int main(){
     vector<int> seq = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
-
     Node *root = buildTree(seq);
-    preOrder(root);
 
+    preOrder(root);
     return 0;
 }
