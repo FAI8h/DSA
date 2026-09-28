@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 
 using namespace  std;
 
@@ -46,6 +47,39 @@ void postOrder(Node *root){
     cout << root->val << " ";
 }
 
+void levelOrder(Node *root){
+    queue<Node *> q;
+
+    q.push(root);
+    q.push(NULL);
+
+    while(!q.empty()){
+        Node *currNode = q.front();
+        q.pop();
+
+        if(currNode == NULL){
+            if(!q.empty()){
+
+                cout << endl;
+                q.push(NULL);
+                continue;
+            }else{
+                break;
+            }
+        }
+
+        cout << currNode->val <<" ";
+
+        if(currNode->left != NULL){
+            q.push(currNode->left);
+        }
+
+        if(currNode->right != NULL){
+            q.push(currNode->right);
+        }
+    }
+}
+
 int main () {
     vector<int> seq = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
     Node *root = buildTree(seq);
@@ -53,5 +87,7 @@ int main () {
 
     cout << "\n";
     postOrder(root);
+    cout << "\n";
+    levelOrder(root);
     return 0;
 }
