@@ -38,9 +38,20 @@ void inOrder(Node * root){
     inOrder(root->right);
 }
 
+void postOrder(Node *root){
+    if(root == NULL) return;
+
+    postOrder(root->left);
+    postOrder(root->right);
+    cout << root->val << " ";
+}
+
 int main () {
     vector<int> seq = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
     Node *root = buildTree(seq);
     inOrder(root);
+
+    cout << "\n";
+    postOrder(root);
     return 0;
 }
