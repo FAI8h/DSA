@@ -52,12 +52,25 @@ int diameterOfTree(Node *root) {
     return max(rootDiameter, max(leftDiameter, rightDiameter));
 };
 
+//pair (diameter, height)
+pair<int,int> treeDiameter(Node *root){
+    if(root == NULL) return make_pair(0, 0);
+
+    pair<int, int> left = treeDiameter(root->left);
+    pair<int, int> right = treeDiameter(root->right);
+
+    int currDiam = left.second + right.second + 1;
+    int finalDiam = max(currDiam, max(left.first, right.first));
+    int finalHt = max(left.second, right.second) + 1;
+
+    return make_pair(finalDiam, finalHt);
+}
 
 int main () {
     vector<int> seq = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
 
     Node *root = buildTree(seq);
-    cout << diameterOfTree(root) << endl;
+    cout << treeDiameter(root).second << endl;
 
     return 0;
 }
