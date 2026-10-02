@@ -41,23 +41,44 @@ bool findPath(Node* root, vector<int>& path,int n){
     return false;
 };
 
-int LCA(Node *root, int n1, int n2){
-    vector<int> path1;
-    vector<int> path2;
+// int LCA(Node *root, int n1, int n2){
+//     vector<int> path1;
+//     vector<int> path2;
 
-    findPath(root, path1, n1);
-    findPath(root, path2, n2);
+//     findPath(root, path1, n1);
+//     findPath(root, path2, n2);
 
-    int lca = -1;
+//     int lca = -1;
 
-    for (int i = 0, j = 0; i < path1.size() && j < path2.size(); i++, j++){
-        if(path1[i] != path2[j]){
-            return lca;
-        }
-        lca = path1[i];
+//     for (int i = 0, j = 0; i < path1.size() && j < path2.size(); i++, j++){
+//         if(path1[i] != path2[j]){
+//             return lca;
+//         }
+//         lca = path1[i];
+//     }
+
+//     return lca;
+// }
+
+Node* LCA(Node* root, int n1, int n2){
+    if(root == NULL) return NULL;
+
+    if(root->val == n1 || root->val == n2) return root;
+
+    Node* left = LCA(root->left, n1, n2);
+    Node* right = LCA(root->right, n1, n2);
+
+    if(left == NULL && right == NULL) return NULL;
+    
+    if(left == NULL){
+        return right;
+    };
+
+    if(right == NULL){
+        return left;
     }
-
-    return lca;
+    
+    return root;
 }
 
 void printPath(vector<int>& path){
@@ -71,6 +92,6 @@ int main () {
     vector<int> seq = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1,};
     Node *root = buildTree(seq);
 
-    cout << LCA(root, 4, 5) << endl;
+    cout << LCA(root, 4, 6)->val << endl;
     return 0;
 }
