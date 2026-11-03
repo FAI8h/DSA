@@ -44,8 +44,8 @@ void printInRange(Node* root, int st, int end){
     if(root == NULL) return;
 
     if(st <= root->val && end >= root->val){
-        cout << root->val << " ";
         printInRange(root->left, st, end);
+        cout << root->val << " ";
         printInRange(root->right, st, end);
     }else if(root->val < st){
         printInRange(root->right, st, end);
